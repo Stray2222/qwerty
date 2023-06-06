@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello Users</title>
+</head>
+<body>
+<div>
+    <h3>User</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Age</th>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th>Update user</th>
+            <th>Delete user</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="all : ${allUsers}">
+            <td th:text="${all.getId()}"/>
+            <td th:text="${all.getAge()}"/>
+            <td th:text="${all.getName()}"/>
+            <td th:text="${all.getLastname()}"/>
+            <td th:text="${all.getEmail()}"/>
+            <td>
+                <form th:action="@{users/edit/{id}(id=${all.getId()})}" th:object="${allUsers}">
+                    <button class="btn btn-dark" type="submit">Update</button>
+                </form>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${all.getId()})}" th:object="${allUsers}">
+                    <button class="btn btn-dark" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <input type="button" th:value="Добавить" onclick="window.location.href= 'addNewUser'">
+    <br>
+</div>
+</body>
+</html>
